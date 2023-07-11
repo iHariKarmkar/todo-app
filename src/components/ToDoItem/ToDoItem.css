@@ -1,0 +1,36 @@
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.list-operation {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.icon {
+    color: var(--accent);
+    transition: .3s;
+}
+
+.icon:hover {
+    color: var(--hover);
+}
+
+.delete-icon:hover {
+    color: rgb(168, 16, 16);
+}
+
+input[type=checkbox] {
+    accent-color: var(--accent);
+}
