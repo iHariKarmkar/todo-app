@@ -1,12 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import ToDoForm from "./components/ToDoForm/ToDoForm";
 import ToDoItemList from "./components/ToDoItemList/ToDoItemList";
 
-const INITIAL_LIST = [{ title: "Do Homework", id: "T1" }];
-
 function App() {
-  const [todo, setTodo] = useState(INITIAL_LIST);
+
+  // LOGIC TO STORE DATA IN LOCAL STORAGE
+  let prevTodo;
+  if (
+    localStorage.getItem("todo") === null ||
+    localStorage.getItem("todo") === undefined
+  ) {
+    prevTodo = [];
+    localStorage.setItem("todo", JSON.stringify(prevTodo));
+  } else {
+    prevTodo = JSON.parse(localStorage.getItem("todo"));
+  }
+
+  const [todo, setTodo] = useState(prevTodo);
+
+  localStorage.setItem("todo", JSON.stringify(todo));
+
+
+  // ADD NEW TODO
   const saveTodoItem = (todoTitle) => {
     setTodo((prevTodo) => {
       const updatedTodo = [...prevTodo];
@@ -18,12 +34,14 @@ function App() {
     });
   };
 
+  // REMOVE ANY TODO
   const deleteTodo = (todoId) => {
     setTodo((prevTodo) => {
       const updatedTodo = prevTodo.filter((todoItem) => todoItem.id !== todoId);
       return updatedTodo;
     });
   };
+
 
   return (
     <div>
